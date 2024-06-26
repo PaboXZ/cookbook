@@ -1,0 +1,22 @@
+:root
+{
+    --primary-color: black;
+}
+body
+{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.navbar
+{
+    display: flex;
+    align-content: center;
+}
+.navbar-link
+{
+
+
+    text-decoration: none;
+    color: var(--primary-color);
+}
