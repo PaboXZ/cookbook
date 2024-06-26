@@ -1,0 +1,7 @@
+{% extends '_layout_straight.html.twig' %}
+{% block title %}{{ recipe.name }}{% endblock %}
+{% block content %}
+{{ recipe.name }}
+{{ recipe.content }}
+{{ recipe.createdAt|date('Y-m-d') }}
+{% endblock %}
