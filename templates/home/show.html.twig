@@ -1,4 +1,12 @@
 {% extends '_layout_straight.html.twig' %}
 {% block content %}
-{{ category }}
+{% for recipe in recipes %}
+{{ recipe.name }}
+{{ recipe.content }}
+{{ recipe.createdAt|date('Y-m-d') }}
+<br>
+{% endfor %}
+{% if not recipes %}
+Nie znaleziono przepisów dla kategorii {{ category }}
+{% endif %}
 {% endblock %}
