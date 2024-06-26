@@ -1,10 +1,10 @@
 <div class="navbar-container">
     <div class="header"></div>
     <div class="navbar">
-        <div class="navbar-item"><a href="#" class="navbar-link">Test</a></div>
-        <div class="navbar-item"><a href="#" class="navbar-link">Test</a></div>
-        <div class="navbar-item"><a href="#" class="navbar-link">Test</a></div>
-        <div class="navbar-item"><a href="#" class="navbar-link">Test</a></div>
+        <div class="navbar-item"><a href="{{ path('app_home_categorydisplay', { category: 'breakfast' }) }}" class="navbar-link">Śniadanie</a></div>
+        <div class="navbar-item"><a href="{{ path('app_home_categorydisplay', { category: 'dinner' }) }}" class="navbar-link">Obiad</a></div>
+        <div class="navbar-item"><a href="{{ path('app_home_categorydisplay', { category: 'side' }) }}" class="navbar-link">Side</a></div>
+        <div class="navbar-item"><a href="{{ path('app_home_categorydisplay', { category: 'pizza' }) }}" class="navbar-link">Pizza</a></div>
     </div>
     <hr>
 </div>

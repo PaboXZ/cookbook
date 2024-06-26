@@ -15,4 +15,14 @@ class HomeController extends AbstractController
     {
         return $this->render('home/index.html.twig');
     }
+
+    #[Route('/category/{category}')]
+    public function categoryDisplay(
+        string $category
+    )
+    {
+        return $this->render('home/show.html.twig', [
+            'category' => $category
+        ]);
+    }
 }
