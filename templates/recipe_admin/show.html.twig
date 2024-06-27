@@ -5,6 +5,9 @@
 {% block body %}
     <h1>Recipe</h1>
 
+    {% if recipe.image %}
+    <img src="/uploads/images/{{ recipe.image }}" alt="Zdjęcie {{ recipe.name }}" height="300"/>
+    {% endif %}
     <table class="table">
         <tbody>
             <tr>

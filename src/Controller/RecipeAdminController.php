@@ -24,13 +24,31 @@ class RecipeAdminController extends AbstractController
     }
 
     #[Route('/new', name: 'app_recipe_admin_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(
+        Request $request, 
+        EntityManagerInterface $entityManager): Response
     {
         $recipe = new Recipe();
         $form = $this->createForm(RecipeType::class, $recipe);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('image')->getData();
+
+            if($image)
+            {
+                try
+                {
+                    $name = bin2hex(random_bytes(40)) .'.'. $image->guessExtension();
+                    $image->move('uploads/images', $name);
+                    $recipe->setImage($name);
+                }
+                catch(FileException $e)
+                {
+                    return $this->redirectToRoute('app_recipe_admin_index', [], Response::HTTP_UNSUPPORTED_MEDIA_TYPE);
+                }
+            }
+
             $entityManager->persist($recipe);
             $entityManager->flush();
 
@@ -73,7 +91,7 @@ class RecipeAdminController extends AbstractController
                 }
                 catch(FileException $e)
                 {
-
+                    return $this->redirectToRoute('app_recipe_admin_index', [], Response::HTTP_UNSUPPORTED_MEDIA_TYPE);
                 }
                 $recipe->setImage($name);
             }
@@ -89,8 +107,22 @@ class RecipeAdminController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_recipe_admin_delete', methods: ['POST'])]
-    public function delete(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
+    public function delete(
+        Request $request, Recipe $recipe, 
+        EntityManagerInterface $entityManager
+        ): Response
     {
+        if($recipe->getImage())
+        {
+            try
+            {
+                unlink(__DIR__.'/../../public/uploads/images/'.$recipe->getImage());
+            }
+            catch(\Exception $e)
+            {
+                return $this->redirectToRoute('app_recipe_admin_edit', ['id' => $recipe->getId()], Response::HTTP_BAD_REQUEST);
+            }
+        }
         if ($this->isCsrfTokenValid('delete'.$recipe->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($recipe);
             $entityManager->flush();
