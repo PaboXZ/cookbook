@@ -22,7 +22,7 @@ class AppFixtures extends Fixture
         //Admin acc
         $admin = new User;
         $admin
-            ->setRoles(['USER_ADMIN'])
+            ->setRoles(['ROLE_ADMIN'])
             ->setUsername('admin')
             ->setPassword('$2y$13$K6ismNdXeb3D9jrMfiK6GONfo88SVFzjA9w1JSAiLi2iXbQ2HuzcO'); //Set default password: 'admin'
         $manager->persist($admin);

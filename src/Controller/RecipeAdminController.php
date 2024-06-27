@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/admin/recipe')]
+#[Route('/admin')]
 class RecipeAdminController extends AbstractController
 {
     #[Route('/', name: 'app_recipe_admin_index', methods: ['GET'])]

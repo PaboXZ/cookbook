@@ -1,41 +1,41 @@
-{% extends 'base.html.twig' %}
+{% extends '_layout_wide.html.twig' %}
 
 {% block title %}Recipe index{% endblock %}
 
-{% block body %}
-    <h1>Recipe index</h1>
+{% block content %}
+    <h1>Recipes:</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Content</th>
-                <th>CreatedAt</th>
-                <th>Category</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for recipe in recipes %}
-            <tr>
-                <td>{{ recipe.id }}</td>
-                <td>{{ recipe.name }}</td>
-                <td>{{ recipe.content }}</td>
-                <td>{{ recipe.createdAt ? recipe.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ recipe.category ? recipe.category|join(', ') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_recipe_admin_show', {'id': recipe.id}) }}">show</a>
-                    <a href="{{ path('app_recipe_admin_edit', {'id': recipe.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="recipe-table">
+        <div class="recipe-table-row">
+            <div class="recipe-table-header">Id</div>
+            <div class="recipe-table-header">Nazwa</div>
+            <div class="recipe-table-header">Przepis</div>
+            <div class="recipe-table-header">Data</div>
+            <div class="recipe-table-header">Kategoria</div>
+            <div class="recipe-table-header">Akcje</div>
+        </div>
+    {% for recipe in recipes %}
+        <div class="recipe-table-row">
+            <div class="recipe-table-item">{{ recipe.id }}</div>
+            <div class="recipe-table-item">{{ recipe.name }}</div>
+            <div class="recipe-table-item">{{ recipe.content }}</div>
+            <div class="recipe-table-item">{{ recipe.createdAt ? recipe.createdAt|date('Y-m-d H:i:s') : '' }}</div>
+            <div class="recipe-table-item">{{ recipe.category ? recipe.category|join(', ') : '' }}</div>
+            <div class="recipe-table-item">
+                <a class="link-button button-action" href="{{ path('app_recipe_admin_show', {'id': recipe.id}) }}">Show</a>
+                <a class="link-button button-accept" href="{{ path('app_recipe_admin_edit', {'id': recipe.id}) }}">Edit</a>
+            </div>
+        </div>
+    {% else %}
+        <div>
+            no records found
+        </div>
+    {% endfor %}
+        <div class="recipe-table-row">
+            <div class="recipe-table-item grid-right">
+                <a class="link-button button-alert" href="{{ path('app_recipe_admin_new') }}">Create new</a>
+            </div>
+        </div>
+    </div>
 
-    <a href="{{ path('app_recipe_admin_new') }}">Create new</a>
 {% endblock %}

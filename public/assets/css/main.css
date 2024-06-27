@@ -1,12 +1,138 @@
 :root
 {
     --primary-color: black;
+    --secondary-color: gray;
+    --primary-accent: black;
+    --secondary-accent: gray;
+    --background-color: white;
+    --background-accent: rgb(219, 219, 219);
+    --action-color: rgb(255, 128, 9);
+    --action-accent: rgb(211, 102, 0);
+    --alert-color: rgb(230, 0, 38);
+    --alert-accent: rgb(190, 0, 32);
+    --accept-color: rgb(0, 131, 39);
+    --accept-accent: rgb(0, 114, 47);
 }
 body
 {
+    font-family: sans-serif;
     margin: 0;
     box-sizing: border-box;
 }
+.top-100
+{
+    margin-top: 100px;
+}
+.grid-form
+{
+    display: grid;
+    grid-template-columns: 15ch 1fr;
+    align-items: center;
+    gap: .8rem 2ch;
+}
+.span-2
+{
+    grid-column: span 2;
+}
+.grid-right
+{
+    grid-column: -2;
+}
+
+.link-button
+{
+    display: inline-block;
+
+    padding: .4em 1em;
+
+    text-decoration: none;
+
+    border-radius: .3em;
+}
+.button-action:hover
+{
+    background-color: var(--action-accent);
+}
+.button-action
+{
+    color: var(--background-color);
+    background-color: var(--action-color);
+    border: 1px solid var(--action-accent)
+}
+.button-accept:hover
+{
+    background-color: var(--accept-accent);
+}
+.button-accept
+{
+    color: var(--background-color);
+    background-color: var(--accept-color);
+    border: 1px solid var(--accept-accent)
+}
+.button-alert:hover
+{
+    background-color: var(--alert-accent);
+}
+.button-alert
+{
+    color: var(--background-color);
+    background-color: var(--alert-color);
+    border: 1px solid var(--alert-accent);
+}
+
+.recipe-table-row
+{
+    margin-top: 1rem;
+    padding: 1rem;
+    gap: 0.5rem;
+    display:grid;
+    grid-template-columns: 10ch 15ch 1fr 20ch 20ch 20ch;
+}
+.recipe-table-row:nth-child(odd)
+{
+    background-color: var(--background-accent);
+}
+.recipe-table-header
+{
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: .1ch;
+}
+.recipe-table-item
+{
+    text-overflow: ellipsis;
+}
+
+.my-form
+{
+    font-family: serif;
+    font-variant: small-caps;
+    font-size: 1.2rem;
+}
+.my-form > input
+{
+    padding: .3rem;
+    outline: none;
+
+    border-radius: 4px;
+    border: 1px solid var(--primary-color);
+}
+.my-form > button
+{
+    padding: .5rem;
+    margin-top: 1rem;
+
+    font-size: 1.6rem;
+    font-variant: small-caps;
+    font-weight: 600;
+    letter-spacing: .15rem;
+
+    border-radius: 4px;
+    border: 1px solid var(--primary-color);
+
+    cursor: pointer;
+}
+
 .header
 {
     min-height: 50px;
@@ -35,12 +161,21 @@ body
 {
     min-width: 10ch;
 }
+
+
+.small-container
+{
+    width: 400px;
+    margin: 1rem auto;
+}
+.wide-container,
 .mid-container
 {
     margin: 1rem 1rem;
 }
 @media(min-width: 1000px)
 {
+    .wide-container,
     .mid-container
     {
         max-width: 90vw;
@@ -49,6 +184,10 @@ body
 }
 @media(min-width: 1500px)
 {
+    .wide-container
+    {
+        width: 70vw;
+    }
     .mid-container
     {
         width: 70rem;
