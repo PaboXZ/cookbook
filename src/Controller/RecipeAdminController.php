@@ -7,6 +7,7 @@ use App\Form\RecipeType;
 use App\Repository\RecipeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -51,12 +52,31 @@ class RecipeAdminController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_recipe_admin_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
+    public function edit(
+        Request $request, 
+        Recipe $recipe, 
+        EntityManagerInterface $entityManager
+    ): Response
     {
         $form = $this->createForm(RecipeType::class, $recipe);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('image')->getData();
+
+            if($file)
+            {
+                $name = bin2hex(random_bytes(40)) .'.'. $file->guessExtension();
+                try
+                {
+                    $file->move('uploads/images', $name);
+                }
+                catch(FileException $e)
+                {
+
+                }
+                $recipe->setImage($name);
+            }
             $entityManager->flush();
 
             return $this->redirectToRoute('app_recipe_admin_index', [], Response::HTTP_SEE_OTHER);

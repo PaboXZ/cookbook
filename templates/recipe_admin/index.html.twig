@@ -18,7 +18,7 @@
         <div class="recipe-table-row">
             <div class="recipe-table-item">{{ recipe.id }}</div>
             <div class="recipe-table-item">{{ recipe.name }}</div>
-            <div class="recipe-table-item">{{ recipe.content }}</div>
+            <div class="recipe-table-item">{{ recipe.content|raw }}</div>
             <div class="recipe-table-item">{{ recipe.createdAt ? recipe.createdAt|date('Y-m-d H:i:s') : '' }}</div>
             <div class="recipe-table-item">{{ recipe.category ? recipe.category|join(', ') : '' }}</div>
             <div class="recipe-table-item">
