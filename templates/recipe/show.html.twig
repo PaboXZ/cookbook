@@ -1,6 +1,9 @@
 {% extends '_layout_straight.html.twig' %}
 {% block title %}{{ recipe.name }}{% endblock %}
 {% block content %}
+{% if recipe.image %}
+<img src="/uploads/images/{{ recipe.image }}" height="300"/>
+{% endif %}
 <h2>{{ recipe.name }}</h2>
 {{ recipe.content|raw }}
 {{ recipe.createdAt|date('Y-m-d') }}

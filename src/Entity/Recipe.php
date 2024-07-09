@@ -23,11 +23,12 @@ class Recipe
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(type: Types::ARRAY)]
+    #[ORM\Column]
     private array $category = [];
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
+
 
     public function getId(): ?int
     {
@@ -93,4 +94,5 @@ class Recipe
 
         return $this;
     }
+
 }
