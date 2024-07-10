@@ -44,4 +44,29 @@ class RecipeIntepreterService
             'contents' => $contentArray
         ]);
     }
+
+    public function getTagsFromRecipe(string $jsonRecipe): array
+    {
+        $recipe = \json_decode($jsonRecipe);
+
+        return $recipe->tags;
+    }
+
+    public function getContentsFromRecipe(string $jsonRecipe): array
+    {
+        $recipe = \json_decode($jsonRecipe);
+
+        return $recipe->contents;
+    }
+
+    public function getRecipeFromJson(string $jsonRecipe): array
+    {
+        $recipe = \json_decode($jsonRecipe);
+
+        return [
+            'contents' => $recipe->contents,
+            'tags' => $recipe->tags
+        ];
+    }
+
 }
